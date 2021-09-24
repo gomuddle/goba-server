@@ -18,7 +18,7 @@ type Server struct {
 func New(goba goba.Goba, validCredentials ...Credentials) *Server {
 	s := Server{
 		goba:        &goba,
-		router:      router.New(),
+		router:      newRouter(),
 		credentials: validCredentials,
 	}
 	s.routes()
