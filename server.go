@@ -1,6 +1,7 @@
 package goba_server
 
 import (
+	"encoding/json"
 	"github.com/fasthttp/router"
 	"github.com/gomuddle/goba"
 	"github.com/valyala/fasthttp"
@@ -33,4 +34,17 @@ func (s Server) ListenAndServe(addr string) error {
 // certFile and keyFile are paths to TLS certificate and key files.
 func (s Server) ListenAndServeTLS(addr, certFile, keyFile string) error {
 	return fasthttp.ListenAndServeTLS(addr, certFile, keyFile, s.router.Handler)
+}
+
+// writeJSON sets the response's "Content-Type" header to
+// "application/json" and writes the JSON representation of
+// v to the response's body.
+func (s Server) writeJSON(ctx *fasthttp.RequestCtx, v interface{}) error {
+	data, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+	ctx.SetContentType("application/json")
+	_, err = ctx.Write(data)
+	return nil
 }
