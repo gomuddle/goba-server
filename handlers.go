@@ -43,6 +43,10 @@ func (s Server) getAllImages() handlerFunc {
 		if err != nil {
 			return err
 		}
+
+		if len(images) == 0 {
+			images = make([]goba.Image, 0)
+		}
 		return s.writeJSON(ctx, response(images))
 	}
 }
