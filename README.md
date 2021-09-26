@@ -1,1 +1,1 @@
-# goba-server
+# gobaserver
