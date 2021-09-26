@@ -1,4 +1,4 @@
-package goba_server
+package gobaserver
 
 // routes configures s's endpoints.
 func (s Server) routes() {

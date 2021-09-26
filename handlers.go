@@ -1,4 +1,4 @@
-package goba_server
+package gobaserver
 
 import (
 	"github.com/gomuddle/goba"

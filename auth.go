@@ -1,4 +1,4 @@
-package goba_server
+package gobaserver
 
 import (
 	"encoding/base64"

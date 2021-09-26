@@ -1,4 +1,4 @@
-package goba_server
+package gobaserver
 
 // Credentials are credentials for interacting with the Server.
 type Credentials struct {

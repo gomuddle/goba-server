@@ -1,4 +1,4 @@
-module github.com/gomuddle/goba-server
+module github.com/gomuddle/gobaserver
 
 go 1.17
 
