@@ -27,13 +27,22 @@ func New(goba goba.Goba, validCredentials ...Credentials) *Server {
 
 // ListenAndServe  serves HTTP requests from the given TCP address.
 func (s Server) ListenAndServe(addr string) error {
-	return fasthttp.ListenAndServe(addr, s.router.Handler)
+	return s.fasthttpServer().ListenAndServe(addr)
 }
 
 // ListenAndServeTLS serves HTTP requests from the given TCP address.
 // certFile and keyFile are paths to TLS certificate and key files.
 func (s Server) ListenAndServeTLS(addr, certFile, keyFile string) error {
-	return fasthttp.ListenAndServeTLS(addr, certFile, keyFile, s.router.Handler)
+	return s.fasthttpServer().ListenAndServeTLS(addr, certFile, keyFile)
+}
+
+// fasthttpServer returns a configured fasthttp.Server.
+func (s Server) fasthttpServer() *fasthttp.Server {
+	server := &fasthttp.Server{
+		Handler: s.router.Handler,
+	}
+	server.ReadBufferSize = 8192
+	return server
 }
 
 // writeJSON sets the response's "Content-Type" header to
